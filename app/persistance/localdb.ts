@@ -20,6 +20,32 @@ export default class localDB {
         () => console.log('CREATED TABLE productos'),
         error => console.error({error}), // Error no necesita estar entre llaves
       );
+
+      tx.executeSql(
+        `CREATE TABLE IF NOT EXISTS maxstock (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          idproducto INTEGER NOT NULL DEFAULT 0,
+          nombre VARCHAR(64) NOT NULL,
+          cantidad INTEGER NOT NULL DEFAULT 0,
+          fecha DATE NOT NULL DEFAULT CURRENT_DATE 
+        );`,
+        [],
+        () => console.log('CREATED TABLE maxstock'),
+        error => console.error({error}), // Error no necesita estar entre llaves
+      );
+
+      tx.executeSql(
+        `CREATE TABLE IF NOT EXISTS minstock (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          id_producto INTEGER NOT NULL DEFAULT 0,
+          nombre VARCHAR(64) NOT NULL,
+          cantidad INTEGER NOT NULL DEFAULT 0,
+          fecha DATE NOT NULL DEFAULT CURRENT_DATE
+        );`,
+        [],
+        () => console.log('CREATED TABLE minstock'),
+        error => console.error({error}), // Error no necesita estar entre llaves
+      );
     });
   }
 }

@@ -6,6 +6,8 @@ import Home from './app/screens/Home';
 import Login from './app/screens/Login';
 import ProductDetails, { Params as ProductDetailsParams, } from './app/screens/productDetails';
 import ProductAdd from './app/screens/ProductAdd';
+import AumStock from './app/screens/AumStock';
+import DisStock from './app/screens/DisStock';
 import { Button } from 'react-native';
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -17,6 +19,8 @@ export type RootStackParamList = {
   Home: undefined;
   ProductDetails: ProductDetailsParams;
   ProductAdd: undefined;
+  AumStock: undefined;
+  DisStock: undefined;
 };
 /* creamos el archivo app/screens/Home.tsx */
 function HomeHeader ():React.JSX.Element{
@@ -60,6 +64,16 @@ function App(): React.JSX.Element {
         <Stack.Screen
         name='ProductAdd'
         component={ProductAdd}
+        />
+
+        <Stack.Screen
+        name='AumStock'
+        component={AumStock}
+        />
+
+        <Stack.Screen
+        name='DisStock'
+        component={DisStock}
         />
 
       </Stack.Navigator>

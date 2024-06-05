@@ -7,6 +7,7 @@ import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import { Props as ProductDetailsProps } from './productDetails'
 import { RootStackParamList } from '../../App';
 import LocalDB from '../persistance/localdb';
+import WebServiceParams from '../WebServiceParams';
 
 /*type RootStackParamList = {
     Home: undefined;
@@ -43,12 +44,27 @@ function Home({ navigation }: HomeProps): React.JSX.Element {
     useEffect(() => {
         LocalDB.init();
         navigation.addListener('focus',async ()=>{
-        const db = await LocalDB.connect();
+            try{
+                const response = await fetch(
+                    `http://${WebServiceParams.host}:${WebServiceParams.port}/productos`,
+                    {
+                        method: 'GET',
+                        headers:{
+                            'Accept': 'application/json',
+                            'Content-Type':'text/plain',
+                        },
+                    },
+                );
+                setProducts(await response.json());
+            } catch(error){
+                console.log(error);
+            }
+        /*const db = await LocalDB.connect();
         db.transaction(async tx => {
             tx.executeSql('SELECT * FROM productos',[],(_,res)=>setProducts(res.rows.raw()),
             error => console.error({error}),
         );
-    });
+    });*/
 });
     },[navigation]);
 

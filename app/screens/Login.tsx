@@ -48,7 +48,7 @@ function Login({navigation}: LoginProps): React.JSX.Element {
     const btnIngresarOnpress = function(){
         if (usuario && contrasena){
             navigation.navigate('Home');
-return;
+            return;
         }
         Alert.alert('Entraste','iniciado sesion...');
     };
